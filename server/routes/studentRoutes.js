@@ -8,7 +8,7 @@ import {
   deleteStudent,
 } from "../controllers/studentController.js";
 
-const route = express.Router();
+const router = express.Router();
 
 router.route("/").post(createStudent).get(getAllStudents);
 
