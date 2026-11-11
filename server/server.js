@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 
+app.use(errorMiddleware);
 await connectDB();
 
 app.get("/", (req, res) => {
@@ -31,6 +32,13 @@ app.get("/api/v1/health", (req, res) => {
 });
 
 app.use("/api/v1/students", studentRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error(`Route not found: ${req.originalUrl}`);
+  error.statusCode = 404;
+  next(error);
+});
+
 
 const PORT = process.env.PORT || 5000;
 
