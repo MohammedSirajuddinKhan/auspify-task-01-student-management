@@ -5,7 +5,7 @@ import helmet from "helmet";
 
 import connectDB from "./config/db.js";
 import studentRoutes from "./routes/studentRoutes.js";
-
+import errorMiddleware from "./middleware/errorMiddleware.js";
 dotenv.config();
 
 const app = express();
