@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 
 import connectDB from "./config/db.js";
+import studentRoutes from "./routes/studentRoutes.js";
 
 dotenv.config();
 
@@ -16,23 +17,23 @@ app.use(helmet());
 await connectDB();
 
 app.get("/", (req, res) => {
-  res.status(200).json({
+  res.json({
     success: true,
-    message: "This is the home page",
-    database: "Connected",
+    message: "Welcome to Student Management API",
   });
 });
 
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Student Management API is running..",
-    database: "Connected",
+    message: "Student Management API is running",
   });
 });
+
+app.use("/api/v1/students", studentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
